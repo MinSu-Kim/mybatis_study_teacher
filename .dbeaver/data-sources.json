@@ -1,0 +1,47 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql5-16fc6b5367c-fc7cca07a69a0d1": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - mysql(root)",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "mysql",
+				"url": "jdbc:mysql://localhost:3306/mysql",
+				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
+				"type": "dev",
+				"handlers": {}
+			}
+		},
+		"mysql5-16fc716afb8-5ee312ed98909880": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - mybatis_study(user_mybatis_study)",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "mybatis_study",
+				"url": "jdbc:mysql://localhost:3306/mybatis_study",
+				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
+				"type": "dev",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
