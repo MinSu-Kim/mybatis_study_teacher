@@ -1,8 +1,8 @@
 -- 마이바티스수업
-DROP SCHEMA IF EXISTS mybatis_study;
+-- DROP SCHEMA IF EXISTS mybatis_study;
 
 -- 마이바티스수업
-CREATE SCHEMA mybatis_study;
+-- CREATE SCHEMA mybatis_study;
 
 -- 주소
 CREATE TABLE mybatis_study.addresses (
