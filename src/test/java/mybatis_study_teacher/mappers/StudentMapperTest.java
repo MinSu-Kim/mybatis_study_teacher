@@ -159,25 +159,25 @@ public class StudentMapperTest {
         Calendar newDate = GregorianCalendar.getInstance();
         newDate.set(1990, 2, 28);
         Student student = new Student();
-        student.setStudId(3);
-        student.setName("test");
-        student.setEmail("test@test.co.kr");
+        student.setStudId(4);
+        student.setName("test4");
+        student.setEmail("test4@test.co.kr");
         student.setDob(newDate.getTime());
         student.setPhone(new PhoneNumber("010-1234-1234"));
         student.setGender(Gender.FEMALE);
         int res = dao.insertEnumStudent(sqlSession, student);
         Assert.assertEquals(1, res);
         
-        student.setStudId(4);
-        student.setName("test4");
-        student.setEmail("test4@test.co.kr");
+        student.setStudId(5);
+        student.setName("test5");
+        student.setEmail("test5@test.co.kr");
         student.setDob(newDate.getTime());
         student.setPhone(new PhoneNumber("010-1234-1234"));
         student.setGender(Gender.MALE);
         int res1 = dao.insertEnumStudent(sqlSession, student);
         Assert.assertEquals(1, res1);
-/*      dao.deleteStudent(sqlSession, 3);
-        dao.deleteStudent(sqlSession, 4);*/
+        dao.deleteStudent(sqlSession, 4);
+        dao.deleteStudent(sqlSession, 5);
     }
 
     @Test

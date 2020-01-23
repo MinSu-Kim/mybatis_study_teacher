@@ -38,17 +38,17 @@ public class UserPicMapperTest {
 		dao = null;
 	}
 
-	@Test
-	public void testAInsertUserPic() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
-        UserPic userPic = new UserPic();
-        userPic.setId(1);
-        userPic.setName("LeeYouYong");
-        userPic.setBio("put some lengthy bio here");
-        userPic.setPic(getPicFile());
-        int result = dao.insertUserPic(sqlSession, userPic);
-        Assert.assertSame(1, result);
-	}
+//	@Test
+//	public void testAInsertUserPic() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+//        UserPic userPic = new UserPic();
+//        userPic.setId(1);
+//        userPic.setName("LeeYouYong");
+//        userPic.setBio("put some lengthy bio here");
+//        userPic.setPic(getPicFile());
+//        int result = dao.insertUserPic(sqlSession, userPic);
+//        Assert.assertSame(1, result);
+//	}
 
 	private byte[] getPicFile(){
         byte[] pic = null;

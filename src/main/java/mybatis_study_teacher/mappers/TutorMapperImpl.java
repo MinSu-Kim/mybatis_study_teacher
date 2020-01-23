@@ -12,4 +12,18 @@ public class TutorMapperImpl implements TutorMapper {
 		return sqlSession.selectOne(namespace + ".selectTutorByTutorId", tutor);
 	}
 
+	@Override
+	public int insertTutor(SqlSession sqlSession, Tutor tutor) {
+		int res = sqlSession.insert(namespace + ".insertTutor", tutor);
+        sqlSession.commit();
+        return res;
+	}
+
+	@Override
+	public int deleteTutor(SqlSession sqlSession, int tutorId) {
+		int res = sqlSession.delete(namespace + ".deleteTutor", tutorId);
+        sqlSession.commit();
+        return res;
+	}
+
 }

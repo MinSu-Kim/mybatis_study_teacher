@@ -1,5 +1,6 @@
 package mybatis_study_teacher.mappers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.logging.Log;
@@ -8,12 +9,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.Course;
 import mybatis_study_teacher.dto.Tutor;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TutorMapperTest {
 	private static SqlSession sqlSession;
 	private static TutorMapper dao;
@@ -32,7 +36,7 @@ public class TutorMapperTest {
 	}
 
 	@Test
-	public void testSelectTutorByTutorId() {
+	public void test01SelectTutorByTutorId() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Tutor findTutor = new Tutor();
@@ -47,5 +51,23 @@ public class TutorMapperTest {
 			log.trace(c.toString());
 		}
 	}
+	
+    @Test
+    public void test02InsertTutor() {
+    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    	Tutor tutor = new Tutor();
+    	tutor.setTutorId(5);
+    	tutor.setName("kim");
+    	tutor.setEmail("test@test.co.kr");
+    	int res = dao.insertTutor(sqlSession, tutor);
+    	Assert.assertEquals(1, res);
+    }
+
+    @Test
+    public void test03DeleteTutor() {
+    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    	int res = dao.deleteTutor(sqlSession, 5);
+    	Assert.assertNotEquals(0, res);
+    }
 
 }
