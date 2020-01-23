@@ -16,6 +16,8 @@ public interface StudentMapper {
 	int insertStudentAutoInc(SqlSession sqlSession, Student student);
 
 	int deleteStudent(SqlSession sqlSession, int id);
+	
+	int updateStudent(SqlSession sqlSession, Student student);
 }
 
 

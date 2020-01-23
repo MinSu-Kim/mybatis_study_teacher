@@ -45,4 +45,11 @@ public class StudentMapperImpl implements StudentMapper {
         return res;
 	}
 
+	@Override
+	public int updateStudent(SqlSession sqlSession, Student student) {
+		int res = sqlSession.update(namespace + ".updateStudent", student);
+		sqlSession.commit();
+		return res;
+	}
+
 }
