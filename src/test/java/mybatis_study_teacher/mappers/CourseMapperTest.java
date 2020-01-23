@@ -208,5 +208,19 @@ public class CourseMapperTest {
         int res = dao.insertCourses(sqlSession, map);
         Assert.assertEquals(3, res);
     }
+    
+    @Test
+    public void test09InsertCourse() {
+    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    	Course newCourse = new Course(7, "Python", "Programming", new Date(), new Date(), 4);
+    	int res = dao.insertCourse(sqlSession, newCourse);
+    	Assert.assertEquals(1, res);
+    }
 
+    @Test
+    public void test10DeleteCourseGreaterId() {
+    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    	int res = dao.deleteCourseGreaterId(sqlSession, 2);
+    	Assert.assertNotEquals(0, res);
+    }
 }

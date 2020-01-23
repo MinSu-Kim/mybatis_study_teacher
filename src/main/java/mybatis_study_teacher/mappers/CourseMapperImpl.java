@@ -42,4 +42,25 @@ public class CourseMapperImpl implements CourseMapper {
         return res;
 	}
 
+	@Override
+	public int insertCourse(SqlSession sqlSession, Course course) {
+		int res = sqlSession.insert(namespace + ".insertCourse", course);
+        sqlSession.commit();
+        return res;
+	}
+
+	@Override
+	public int deleteCourseGreaterId(SqlSession sqlSession, int courseId) {
+		int res = sqlSession.delete(namespace + ".deleteCourseGreaterId", courseId);
+        sqlSession.commit();
+        return res;
+	}
+
+	@Override
+	public int deleteCourse(SqlSession sqlSession, int courseId) {
+		int res = sqlSession.delete(namespace + ".deleteCourse", courseId);
+        sqlSession.commit();
+        return res;
+	}
+
 }

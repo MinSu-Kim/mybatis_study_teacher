@@ -18,4 +18,8 @@ public interface CourseMapper {
 	/* foreach */
 	int insertCourses(SqlSession sqlSession, Map<String, Object> map);
 
+	/* transaction */
+	int insertCourse(SqlSession sqlSession, Course course);
+	int deleteCourse(SqlSession sqlSession, int courseId);
+	int deleteCourseGreaterId(SqlSession sqlSession, int courseId);
 }
