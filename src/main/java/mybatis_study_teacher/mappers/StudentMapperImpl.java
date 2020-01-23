@@ -38,4 +38,11 @@ public class StudentMapperImpl implements StudentMapper {
         return res;
 	}
 
+	@Override
+	public int deleteStudent(SqlSession sqlSession, int id) {
+		int res = sqlSession.delete(namespace + ".deleteStudent", id);
+        sqlSession.commit();
+        return res;
+	}
+
 }

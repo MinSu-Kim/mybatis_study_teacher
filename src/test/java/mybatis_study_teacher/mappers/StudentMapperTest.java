@@ -9,12 +9,15 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.PhoneNumber;
 import mybatis_study_teacher.dto.Student;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentMapperTest {
 	private static SqlSession sqlSession;
 	private static StudentMapper dao;
@@ -27,7 +30,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void testSelectStudentByNo() {
+	public void test1SelectStudentByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
@@ -37,7 +40,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void testSelectStudentByNoWithResultMap() {
+	public void test2SelectStudentByNoWithResultMap() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
@@ -47,7 +50,7 @@ public class StudentMapperTest {
 	}
 	
 	@Test
-	public void testSelectStudentByAll() {
+	public void test3SelectStudentByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	    List<Student> lists = dao.selectStudentByAll(sqlSession);
 	    Assert.assertNotNull(lists);
@@ -57,7 +60,7 @@ public class StudentMapperTest {
 	}
 
     @Test
-    public void testInsertStudent() {
+    public void test4InsertStudent() {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         Calendar newDate = GregorianCalendar.getInstance();
         newDate.set(1990, 2, 28);
@@ -70,9 +73,9 @@ public class StudentMapperTest {
         int res = dao.insertStudent(sqlSession, student);
         Assert.assertEquals(1, res);
     }
-
+/*
     @Test
-    public void testInsertStudentAutoInc() {
+    public void test5InsertStudentAutoInc() {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         Calendar newDate = GregorianCalendar.getInstance();
         newDate.set(1990, 2, 28);
@@ -84,4 +87,12 @@ public class StudentMapperTest {
         int res = dao.insertStudentAutoInc(sqlSession, student);
         Assert.assertEquals(1, res);
     }
+*/    
+    @Test
+    public void test6DeleteStudent(){
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+        int deleteStudent = dao.deleteStudent(sqlSession, 3);
+        Assert.assertSame(1, deleteStudent);
+    }
+
 }
