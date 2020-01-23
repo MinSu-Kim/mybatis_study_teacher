@@ -75,4 +75,9 @@ public class StudentMapperImpl implements StudentMapper {
         return res;
 	}
 
+	@Override
+	public Student selectAllStudentByMap(SqlSession sqlSession, Map<String, String> map) {
+		return sqlSession.selectOne(namespace + ".selectAllStudentByMap", map);
+	}
+
 }
