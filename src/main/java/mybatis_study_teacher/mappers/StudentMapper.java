@@ -32,6 +32,9 @@ public interface StudentMapper {
 	/* enum 타입 다루기 */
     int insertEnumStudent(SqlSession sqlSession, Student student);
 
+	/* 여러 개의 입력 파라미터 전달 */
+    Student selectAllStudentByMap(SqlSession sqlSession, Map<String, String> map);
+
 }
 
 

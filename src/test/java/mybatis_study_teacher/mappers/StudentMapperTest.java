@@ -3,6 +3,7 @@ package mybatis_study_teacher.mappers;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -177,6 +178,26 @@ public class StudentMapperTest {
         Assert.assertEquals(1, res1);
 /*      dao.deleteStudent(sqlSession, 3);
         dao.deleteStudent(sqlSession, 4);*/
+    }
+
+    @Test
+    public void test12SelectAllStudentByMap() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+        Map<String, String> maps = new HashMap<>();
+        maps.put("name", "Timothy");
+        maps.put("email", "timothy@gmail.com");
+        Student student = dao.selectAllStudentByMap(sqlSession, maps);
+        Assert.assertNotNull(student);
+        log.debug(student.toString());
+
+        maps.remove("email");
+        student = dao.selectAllStudentByMap(sqlSession, maps);
+        log.debug(student.toString());
+       
+        maps.clear();
+        maps.put("email", "timothy@gmail.com");
+        student = dao.selectAllStudentByMap(sqlSession, maps);
+        log.debug(student.toString()); 
     }
 
 }
