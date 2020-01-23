@@ -116,4 +116,14 @@ public class StudentMapperTest {
         Assert.assertSame(1, result);
     }
 
+    @Test
+    public void test8SelectStudentByAllForResutlMap(){
+       log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+       List<Student> lists = dao.selectStudentByAllForResutlMap(sqlSession);
+       Assert.assertNotNull(lists);
+       for(Student std : lists) {
+    	   log.debug(std.toString());
+       }
+	}
+
 }

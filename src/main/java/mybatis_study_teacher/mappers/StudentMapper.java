@@ -18,6 +18,10 @@ public interface StudentMapper {
 	int deleteStudent(SqlSession sqlSession, int id);
 	
 	int updateStudent(SqlSession sqlSession, Student student);
+	
+	/* resultMap */
+	List<Student> selectStudentByAllForResutlMap(SqlSession sqlSession);
+
 }
 
 

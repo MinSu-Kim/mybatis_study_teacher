@@ -52,4 +52,9 @@ public class StudentMapperImpl implements StudentMapper {
 		return res;
 	}
 
+	@Override
+	public List<Student> selectStudentByAllForResutlMap(SqlSession sqlSession) {
+		return sqlSession.selectList(namespace + ".selectStudentByAllForResutlMap");
+	}
+
 }
