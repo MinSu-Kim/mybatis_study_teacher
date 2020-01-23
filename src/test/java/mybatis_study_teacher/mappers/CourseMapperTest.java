@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.Course;
+import mybatis_study_teacher.dto.CourseStat;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -222,5 +223,32 @@ public class CourseMapperTest {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     	int res = dao.deleteCourseGreaterId(sqlSession, 2);
     	Assert.assertNotEquals(0, res);
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    @Test
+    public void test11getCourseCountByTutor() {
+       log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+       Map<String, Object> param = new HashMap<>();
+       param.put("tutor_id", 1);
+       Map<String,Object> map= dao.getCourseCountByTutor(sqlSession, param);
+       Assert.assertNotEquals(0, map.size());
+    }
+
+    @Test
+    public void test12getCourseCountByTutor2() {
+       log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+       Map<String, Object> param = new HashMap<>();
+       param.put("tutor_id", 1);
+       Map<String,Object> map= dao.getCourseCountByTutor2(sqlSession, param);
+       Assert.assertNotEquals(0, map.size());
+    }
+
+    @Test
+    public void test12getCourseCountByTutor3() {
+       log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+       CourseStat stat = dao.getCourseCountByTutor3(sqlSession, 1);
+       Assert.assertNotNull(stat);
+
     }
 }

@@ -36,3 +36,21 @@ CREATE TABLE user_pics (
   bio longtext COLLATE utf8_unicode_ci COMMENT 'bio',
   PRIMARY KEY (`id`)
 )
+
+DROP PROCEDURE IF EXISTS course_total;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE course_total(in tutor_id int)
+BEGIN
+	select t.name as tutor, ifnull(count(c.name),0) as total
+	from tutors t left join courses c on t.tutor_id = c.tutor_id
+	where t.tutor_id = tutor_id;
+END$$
+DELIMITER ;
+
+call course_total(1);
+
+call course_total(3);
+
+
