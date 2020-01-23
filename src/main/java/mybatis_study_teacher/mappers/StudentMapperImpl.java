@@ -68,4 +68,11 @@ public class StudentMapperImpl implements StudentMapper {
 		return sqlSession.selectOne(namespace + ".selectStudentByNoAssociation", student);
 	}
 
+	@Override
+	public int insertEnumStudent(SqlSession sqlSession, Student student) {
+		int res = sqlSession.insert(namespace + ".insertEnumStudent", student);
+        sqlSession.commit();
+        return res;
+	}
+
 }

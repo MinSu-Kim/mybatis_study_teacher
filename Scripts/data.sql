@@ -25,3 +25,14 @@ INSERT INTO COURSE_ENROLLMENT (COURSE_ID,STUD_ID) VALUES
  (1,1),
  (1,2),
  (2,2);
+
+ALTER TABLE students ADD gender tinyint unsigned;
+
+
+CREATE TABLE user_pics (
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  name varchar(50) not NULL COMMENT 'name',
+  pic longblob COMMENT 'pic',
+  bio longtext COLLATE utf8_unicode_ci COMMENT 'bio',
+  PRIMARY KEY (`id`)
+)

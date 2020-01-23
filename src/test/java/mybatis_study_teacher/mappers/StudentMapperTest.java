@@ -16,6 +16,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import mybatis_study_teacher.dto.Gender;
 import mybatis_study_teacher.dto.PhoneNumber;
 import mybatis_study_teacher.dto.Student;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
@@ -150,5 +151,32 @@ public class StudentMapperTest {
         log.debug(seletedStd.toString());
      }
 
+    @Test
+    public void test11InsertEnumStudent() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+
+        Calendar newDate = GregorianCalendar.getInstance();
+        newDate.set(1990, 2, 28);
+        Student student = new Student();
+        student.setStudId(3);
+        student.setName("test");
+        student.setEmail("test@test.co.kr");
+        student.setDob(newDate.getTime());
+        student.setPhone(new PhoneNumber("010-1234-1234"));
+        student.setGender(Gender.FEMALE);
+        int res = dao.insertEnumStudent(sqlSession, student);
+        Assert.assertEquals(1, res);
+        
+        student.setStudId(4);
+        student.setName("test4");
+        student.setEmail("test4@test.co.kr");
+        student.setDob(newDate.getTime());
+        student.setPhone(new PhoneNumber("010-1234-1234"));
+        student.setGender(Gender.MALE);
+        int res1 = dao.insertEnumStudent(sqlSession, student);
+        Assert.assertEquals(1, res1);
+/*      dao.deleteStudent(sqlSession, 3);
+        dao.deleteStudent(sqlSession, 4);*/
+    }
 
 }
