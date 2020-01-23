@@ -15,4 +15,14 @@ public class CourseMapperImpl implements CourseMapper {
 		return sqlSession.selectList(namespace + ".selectCoursesByCondition", map);
 	}
 
+	@Override
+	public List<Course> selectCaseCourses(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.selectList(namespace + ".selectCaseCourses", map);
+	}
+
+	@Override
+	public List<Course> selectWhereCourses(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.selectList(namespace + ".selectWhereCourses", map);
+	}
+
 }

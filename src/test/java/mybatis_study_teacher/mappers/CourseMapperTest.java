@@ -1,5 +1,6 @@
 package mybatis_study_teacher.mappers;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -80,4 +81,62 @@ public class CourseMapperTest {
         	log.trace(c.toString());
         }
 	}
+	
+	@Test
+    public void test04SelectCaseCourses() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("searchBy", "Tutor");
+        map.put("tutorId", 1);
+        List<Course> courses = dao.selectCaseCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.replace("searchBy", "CourseName");
+        map.remove("tutorId");
+        map.put("courseName", "%java%");
+        courses = dao.selectCaseCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+    }
+	
+    @Test
+    public void test05SelectWhereCourses() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        List<Course> courses = dao.selectWhereCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.put("tutorId", 1);
+        courses = dao.selectWhereCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.put("courseName", "%java%");
+        courses = dao.selectWhereCourses(sqlSession, map);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.clear();
+        map.put("endDate", new Date());
+        courses = dao.selectWhereCourses(sqlSession, map);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+    }
+
+
 }

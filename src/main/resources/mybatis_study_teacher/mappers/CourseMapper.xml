@@ -29,4 +29,36 @@
         </where>
     </select>
 	
+	<select id="selectCaseCourses" parameterType="hashmap" resultMap="CourseResult">
+        select * from courses
+        <choose>
+            <when test="searchBy=='Tutor'">
+                where tutor_id=#{tutorId}
+            </when>
+            <when test="searchBy=='CourseName'">
+                where name like #{courseName}
+            </when>
+            <otherwise>
+                where end_date &gt;=now()
+            </otherwise>
+        </choose>
+    </select>
+	
+	<select id="selectWhereCourses" parameterType="map" resultMap="CourseResult">
+		select * from courses
+		<where>
+            <if test="tutorId != null">
+                tutor_id = #{tutorId}
+            </if>
+            <if test="courseName != null">
+                AND name like #{courseName}
+            </if>
+            <if test="startDate != null">
+                AND start_date &gt;= ${startDate}
+            </if>
+            <if test="endDate != null">
+                AND end_date &lt;=#{endDate}
+            </if>
+        </where>
+	</select>
 </mapper>
