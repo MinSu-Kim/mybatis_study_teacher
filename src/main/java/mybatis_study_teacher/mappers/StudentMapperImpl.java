@@ -31,4 +31,11 @@ public class StudentMapperImpl implements StudentMapper {
         return res;
 	}
 
+	@Override
+	public int insertStudentAutoInc(SqlSession sqlSession, Student student) {
+		int res = sqlSession.insert(namespace + ".insertStudentAutoInc", student);
+        sqlSession.commit();
+        return res;
+	}
+
 }

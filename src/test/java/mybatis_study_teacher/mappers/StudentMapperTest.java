@@ -71,4 +71,17 @@ public class StudentMapperTest {
         Assert.assertEquals(1, res);
     }
 
+    @Test
+    public void testInsertStudentAutoInc() {
+    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+        Calendar newDate = GregorianCalendar.getInstance();
+        newDate.set(1990, 2, 28);
+        Student student = new Student();
+        student.setName("홍길동4");
+        student.setEmail("lee4@test.co.kr");
+        student.setDob(newDate.getTime());
+        student.setPhone(new PhoneNumber("010-1234-1234"));      
+        int res = dao.insertStudentAutoInc(sqlSession, student);
+        Assert.assertEquals(1, res);
+    }
 }

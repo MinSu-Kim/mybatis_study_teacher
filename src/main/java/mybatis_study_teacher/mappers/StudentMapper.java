@@ -13,6 +13,7 @@ public interface StudentMapper {
 	List<Student> selectStudentByAll(SqlSession sqlSession);
 	
 	int insertStudent(SqlSession sqlSession, Student student);
+	int insertStudentAutoInc(SqlSession sqlSession,Student student);
 
 }
 

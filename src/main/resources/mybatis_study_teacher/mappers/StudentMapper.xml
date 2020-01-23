@@ -43,4 +43,11 @@
 		insert into students(stud_id, name, email, phone, dob) 
 		values(#{studId}, #{name}, #{email}, #{phone}, #{dob})
 	</insert>
+	
+	<insert id="insertStudentAutoInc" parameterType="Student" useGeneratedKeys="true" keyProperty="studId">
+        insert into students(name, email, phone, dob) 
+        values(#{name}, #{email}, #{phone}, #{dob})
+    </insert>
+	
+	
 </mapper>
