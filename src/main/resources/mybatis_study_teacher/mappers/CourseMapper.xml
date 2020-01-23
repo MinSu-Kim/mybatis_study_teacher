@@ -11,4 +11,22 @@
         <result property="endDate" column="end_date"/>
     </resultMap>
 	
+	<select id="selectCoursesByCondition" parameterType="hashmap" resultMap="CourseResult">
+        select * from courses
+		<where>
+			<if test="tutorId != null">
+				and tutor_id != #{tutorId}
+			</if>
+            <if test="courseName != null">
+                and name like #{courseName}
+            </if>
+            <if test="startDate != null">
+                and start_date &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                and end_date &lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+	
 </mapper>
