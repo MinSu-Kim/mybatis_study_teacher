@@ -108,6 +108,11 @@
 		<include refid="selectSQL"/>
 	</select>
 	
+	<!-- ResultSet 처리방식의 재정의 -->
+    <select id="selectStudentForMap" resultMap="StudentGenderResult">
+        select stud_id, name from students
+    </select>
+	
 	<!--  insert  -->
 	<insert id="insertStudent" parameterType="Student">
 		insert into students(stud_id, name, email, phone, dob) 
