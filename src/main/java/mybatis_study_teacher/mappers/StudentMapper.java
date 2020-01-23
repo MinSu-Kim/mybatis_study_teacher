@@ -26,6 +26,9 @@ public interface StudentMapper {
 	/* hashMap */
 	List<Map<String, Object>> selectStudentByAllForHashMap(SqlSession sqlSession);
 
+	/* 내포된 결과매핑(ResultMap)을 사용한 일대일 매핑 */
+	Student selectStudentByNoAssociation(SqlSession sqlSession, Student student);
+
 }
 
 
