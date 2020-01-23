@@ -33,7 +33,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test1SelectStudentByNo() {
+	public void test01SelectStudentByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
@@ -43,7 +43,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test2SelectStudentByNoWithResultMap() {
+	public void test02SelectStudentByNoWithResultMap() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
@@ -53,7 +53,7 @@ public class StudentMapperTest {
 	}
 	
 	@Test
-	public void test3SelectStudentByAll() {
+	public void test03SelectStudentByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	    List<Student> lists = dao.selectStudentByAll(sqlSession);
 	    Assert.assertNotNull(lists);
@@ -63,7 +63,7 @@ public class StudentMapperTest {
 	}
 
     @Test
-    public void test4InsertStudent() {
+    public void test04InsertStudent() {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         Calendar newDate = GregorianCalendar.getInstance();
         newDate.set(1990, 2, 28);
@@ -78,7 +78,7 @@ public class StudentMapperTest {
     }
 /*
     @Test
-    public void test5InsertStudentAutoInc() {
+    public void test05InsertStudentAutoInc() {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         Calendar newDate = GregorianCalendar.getInstance();
         newDate.set(1990, 2, 28);
@@ -92,14 +92,14 @@ public class StudentMapperTest {
     }
 */    
     @Test
-    public void test6DeleteStudent(){
+    public void test06DeleteStudent(){
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         int deleteStudent = dao.deleteStudent(sqlSession, 3);
         Assert.assertSame(1, deleteStudent);
     }
 
     @Test
-    public void test7UpdateStudent(){
+    public void test07UpdateStudent(){
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         Student student = new Student();
         student.setStudId(1);
@@ -119,7 +119,7 @@ public class StudentMapperTest {
     }
 
     @Test
-    public void test8SelectStudentByAllForResutlMap(){
+    public void test08SelectStudentByAllForResutlMap(){
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
        List<Student> lists = dao.selectStudentByAllForResutlMap(sqlSession);
        Assert.assertNotNull(lists);
@@ -129,7 +129,7 @@ public class StudentMapperTest {
 	}
 
     @Test
-    public void test9SelectStudentByAllForHashMap(){
+    public void test09SelectStudentByAllForHashMap(){
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
        List<Map<String,Object>> lists = dao.selectStudentByAllForHashMap(sqlSession);
        Assert.assertNotNull(lists);
@@ -139,5 +139,16 @@ public class StudentMapperTest {
     	   }
        }
     }
+    
+    @Test
+    public void test10SelectStudentByNoAssociation() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+        Student student = new Student();
+        student.setStudId(1);
+        Student seletedStd = dao.selectStudentByNoAssociation(sqlSession, student);
+        Assert.assertNotNull(seletedStd);
+        log.debug(seletedStd.toString());
+     }
+
 
 }
