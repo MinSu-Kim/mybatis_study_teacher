@@ -142,4 +142,16 @@
          where stud_id=#{studId}
 	</update>
 	
+	<!-- set 조건 -->
+    <update id="updateSetStudent" parameterType="Student">
+        update students
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="dob != null">dob=#{dob},</if>
+        </set>
+        where stud_id=#{studId}
+    </update>
+	
 </mapper>
