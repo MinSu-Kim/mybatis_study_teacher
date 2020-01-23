@@ -51,6 +51,10 @@
 		<include refid="selectSQL"/>
 	</select>
 	
+	<select id="selectStudentByAllForHashMap" resultType="map">
+		<include refid="selectSQL"/>
+	</select>
+	
 	<!--  insert  -->
 	<insert id="insertStudent" parameterType="Student">
 		insert into students(stud_id, name, email, phone, dob) 

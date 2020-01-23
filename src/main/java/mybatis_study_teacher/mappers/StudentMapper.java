@@ -1,6 +1,7 @@
 package mybatis_study_teacher.mappers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,6 +22,9 @@ public interface StudentMapper {
 	
 	/* resultMap */
 	List<Student> selectStudentByAllForResutlMap(SqlSession sqlSession);
+
+	/* hashMap */
+	List<Map<String, Object>> selectStudentByAllForHashMap(SqlSession sqlSession);
 
 }
 

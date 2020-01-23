@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
@@ -125,5 +127,17 @@ public class StudentMapperTest {
     	   log.debug(std.toString());
        }
 	}
+
+    @Test
+    public void test9SelectStudentByAllForHashMap(){
+       log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+       List<Map<String,Object>> lists = dao.selectStudentByAllForHashMap(sqlSession);
+       Assert.assertNotNull(lists);
+       for(Map<String, Object> map : lists) {
+    	   for(Entry<String, Object> e : map.entrySet()) {
+    		   log.debug(String.format("%s -> %s", e.getKey(), e.getValue()));
+    	   }
+       }
+    }
 
 }
