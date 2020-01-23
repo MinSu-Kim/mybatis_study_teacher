@@ -200,4 +200,15 @@ public class StudentMapperTest {
         log.debug(student.toString()); 
     }
 
+    @Test
+    public void test13SelectStudentForMap() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+        Map<Integer, String> map = dao.selectStudentForMap(sqlSession);
+        Assert.assertNotNull(map);
+        
+        for(Entry<Integer, String>entry : map.entrySet()){
+            System.out.printf("key(%s) - value(%s)%n", entry.getKey(), entry.getValue());
+        }
+    }    
+
 }
