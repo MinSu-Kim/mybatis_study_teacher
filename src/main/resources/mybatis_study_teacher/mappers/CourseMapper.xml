@@ -61,4 +61,18 @@
             </if>
         </where>
 	</select>
+	
+	<select id="selectTrimCourses" parameterType="map" resultMap="CourseResult">
+		select * from courses
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+            <!-- where 자동 추가 -->
+            <if test="tutorId != null"> 
+                tutor_id=#{tutorId}
+            </if>
+            <!-- 만약 where tutor_id=1 이 추가 된 경우 where 삭제하고 where tutor_id가 없는 경우 where 추가하고 and 제거-->
+            <if test="courseName != null">
+                and name like #{courseName}
+            </if>
+        </trim>
+	</select>
 </mapper>

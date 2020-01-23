@@ -138,5 +138,40 @@ public class CourseMapperTest {
         
     }
 
+    @Test
+    public void test06SelectTrimCourses() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Course> courses = dao.selectTrimCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.put("tutorId", 1);
+        courses = dao.selectTrimCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.clear();
+        map.put("courseName", "%java%");
+        courses = dao.selectTrimCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+        
+        map.clear();
+        map.put("tutorId", 1);
+        map.put("courseName", "%java%");
+        courses = dao.selectTrimCourses(sqlSession, map);
+        Assert.assertNotNull(courses);
+        for(Course c : courses) {
+        	log.trace(c.toString());
+        }
+    }
 
 }
