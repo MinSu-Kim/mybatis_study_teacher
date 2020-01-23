@@ -13,4 +13,9 @@ public interface CourseMapper {
 	List<Course> selectWhereCourses(SqlSession sqlSession, Map<String, Object> map);
 	List<Course> selectTrimCourses(SqlSession sqlSession, Map<String, Object> map);
 
+	List<Course> selectCoursesForeachByTutors(SqlSession sqlSession, Map<String, Object> map);
+
+	/* foreach */
+	int insertCourses(SqlSession sqlSession, Map<String, Object> map);
+
 }

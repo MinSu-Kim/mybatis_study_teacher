@@ -30,4 +30,16 @@ public class CourseMapperImpl implements CourseMapper {
 		return sqlSession.selectList(namespace + ".selectTrimCourses", map);
 	}
 
+	@Override
+	public List<Course> selectCoursesForeachByTutors(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.selectList(namespace + ".selectCoursesForeachByTutors", map);
+	}
+
+	@Override
+	public int insertCourses(SqlSession sqlSession, Map<String, Object> map) {
+		int res = sqlSession.insert(namespace + ".insertCourses", map);
+        sqlSession.commit();
+        return res;
+	}
+
 }
