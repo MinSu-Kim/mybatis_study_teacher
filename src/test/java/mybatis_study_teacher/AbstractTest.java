@@ -7,7 +7,7 @@ import org.junit.After;
 
 public class AbstractTest {
 	
-	protected static Logger logger = LogManager.getLogger();
+	protected static Logger log = LogManager.getLogger();
 	
 	@After
 	public void tearDown() throws Exception {

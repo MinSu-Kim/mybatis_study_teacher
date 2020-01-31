@@ -22,8 +22,6 @@ public class AddressMapperImpl implements AddressMapper {
 		return instance;
 	}
 
-	
-
 	@Override
 	public List<Address> selectAddressByAll(RowBounds rowBounds) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){

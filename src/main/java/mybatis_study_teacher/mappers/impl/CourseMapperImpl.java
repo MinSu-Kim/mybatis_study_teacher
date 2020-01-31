@@ -93,7 +93,6 @@ public class CourseMapperImpl implements CourseMapper {
 			sqlSession.select(namespace + ".getCourseCountByTutor", param, resultHandler);
 			return map;
 		}
-
 	}
 
 	@Override
