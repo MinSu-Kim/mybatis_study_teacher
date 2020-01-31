@@ -13,8 +13,7 @@
 				"database": "mysql",
 				"url": "jdbc:mysql://localhost:3306/mysql",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
-				"type": "dev",
-				"handlers": {}
+				"type": "dev"
 			}
 		},
 		"mysql5-16fc716afb8-5ee312ed98909880": {
@@ -29,8 +28,18 @@
 				"database": "mybatis_study",
 				"url": "jdbc:mysql://localhost:3306/mybatis_study",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
-				"type": "dev",
-				"handlers": {}
+				"type": "dev"
+			}
+		}
+	},
+	"virtual-models": {
+		"mysql5-16fc716afb8-5ee312ed98909880": {
+			"mybatis_study": {
+				"@properties": {
+					"erd.diagram.state": {
+						"serialized": "<diagram version=\"1\" name=\"mybatis_study\" time=\"202002010020\"><entities><data-source id=\"mysql5-16fc716afb8-5ee312ed98909880\"><entity id=\"1\" name=\"addresses\" fq-name=\"mybatis_study.addresses\" order=\"0\" x=\"491\" y=\"262\"><path name=\"mybatis_study\"/></entity><entity id=\"2\" name=\"course_enrollment\" fq-name=\"mybatis_study.course_enrollment\" order=\"1\" x=\"20\" y=\"187\"><path name=\"mybatis_study\"/></entity><entity id=\"3\" name=\"courses\" fq-name=\"mybatis_study.courses\" order=\"2\" x=\"213\" y=\"20\"><path name=\"mybatis_study\"/></entity><entity id=\"4\" name=\"department\" fq-name=\"mybatis_study.department\" order=\"3\" x=\"213\" y=\"505\"><path name=\"mybatis_study\"/></entity><entity id=\"5\" name=\"employee\" fq-name=\"mybatis_study.employee\" order=\"4\" x=\"20\" y=\"522\"><path name=\"mybatis_study\"/></entity><entity id=\"6\" name=\"post\" fq-name=\"mybatis_study.post\" order=\"5\" x=\"213\" y=\"1077\"><path name=\"mybatis_study\"/></entity><entity id=\"7\" name=\"students\" fq-name=\"mybatis_study.students\" order=\"6\" x=\"213\" y=\"228\"><path name=\"mybatis_study\"/></entity><entity id=\"8\" name=\"tbl_attach\" fq-name=\"mybatis_study.tbl_attach\" order=\"7\" x=\"20\" y=\"753\"><path name=\"mybatis_study\"/></entity><entity id=\"9\" name=\"tbl_board\" fq-name=\"mybatis_study.tbl_board\" order=\"8\" x=\"213\" y=\"794\"><path name=\"mybatis_study\"/></entity><entity id=\"10\" name=\"tbl_reply\" fq-name=\"mybatis_study.tbl_reply\" order=\"9\" x=\"20\" y=\"892\"><path name=\"mybatis_study\"/></entity><entity id=\"11\" name=\"title\" fq-name=\"mybatis_study.title\" order=\"10\" x=\"213\" y=\"644\"><path name=\"mybatis_study\"/></entity><entity id=\"12\" name=\"tutors\" fq-name=\"mybatis_study.tutors\" order=\"11\" x=\"362\" y=\"107\"><path name=\"mybatis_study\"/></entity><entity id=\"13\" name=\"user_pics\" fq-name=\"mybatis_study.user_pics\" order=\"12\" x=\"601\" y=\"112\"><path name=\"mybatis_study\"/></entity></data-source></entities><relations><relation name=\"FK_STUDENTS_ADDR\" fq-name=\"mybatis_study.students.`FK_STUDENTS_ADDR`\" type=\"fk\" pk-ref=\"1\" fk-ref=\"7\"/><relation name=\"FK_TUTORS_ADDR\" fq-name=\"mybatis_study.tutors.`FK_TUTORS_ADDR`\" type=\"fk\" pk-ref=\"1\" fk-ref=\"12\"/><relation name=\"FK_ENROLLMENT_COURSE\" fq-name=\"mybatis_study.course_enrollment.`FK_ENROLLMENT_COURSE`\" type=\"fk\" pk-ref=\"3\" fk-ref=\"2\"/><relation name=\"FK_department_TO_employee\" fq-name=\"mybatis_study.employee.`FK_department_TO_employee`\" type=\"fk\" pk-ref=\"4\" fk-ref=\"5\"/><relation name=\"FK_ENROLLMENT_STUD\" fq-name=\"mybatis_study.course_enrollment.`FK_ENROLLMENT_STUD`\" type=\"fk\" pk-ref=\"7\" fk-ref=\"2\"/><relation name=\"FK_tbl_board_TO_tbl_attach\" fq-name=\"mybatis_study.tbl_attach.`FK_tbl_board_TO_tbl_attach`\" type=\"fk\" pk-ref=\"9\" fk-ref=\"8\"/><relation name=\"FK_tbl_board_TO_tbl_reply\" fq-name=\"mybatis_study.tbl_reply.`FK_tbl_board_TO_tbl_reply`\" type=\"fk\" pk-ref=\"9\" fk-ref=\"10\"/><relation name=\"FK_title_TO_employee\" fq-name=\"mybatis_study.employee.`FK_title_TO_employee`\" type=\"fk\" pk-ref=\"11\" fk-ref=\"5\"/><relation name=\"FK_COURSE_TUTOR\" fq-name=\"mybatis_study.courses.`FK_COURSE_TUTOR`\" type=\"fk\" pk-ref=\"12\" fk-ref=\"3\"/></relations></diagram>"
+					}
+				}
 			}
 		}
 	},
