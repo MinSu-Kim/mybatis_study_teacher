@@ -10,7 +10,7 @@ public class MyBatisSqlSessionFactoryTest {
 	protected static final Log log = LogFactory.getLog(MyBatisSqlSessionFactoryTest.class);
 	
 	@Test
-	public void testOpenSession() {
+	public void testOpenSessionAutoCommitTrue() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		SqlSession session = MyBatisSqlSessionFactory.openSession();
 		log.debug("session " + session);

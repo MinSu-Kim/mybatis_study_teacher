@@ -9,99 +9,137 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
 import mybatis_study_teacher.dto.Student;
+import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
 public class StudentMapperImpl implements StudentMapper {
 	private String namespace = "mybatis_study_teacher.mappers.StudentMapper";
-	
-	@Override
-	public Student selectStudentByNo(SqlSession sqlSession, Student student) {
-		return sqlSession.selectOne(namespace + ".selectStudentByNo", student);
+	private static final StudentMapperImpl instance = new StudentMapperImpl();
+
+	private StudentMapperImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static StudentMapperImpl getInstance() {
+		return instance;
 	}
 
 	@Override
-	public Student selectStudentByNoWithResultMap(SqlSession sqlSession, Student student) {
-		return sqlSession.selectOne(namespace + ".selectStudentByNoWithResultMap", student);
+	public Student selectStudentByNo(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace + ".selectStudentByNo", student);
+		}
 	}
 
 	@Override
-	public List<Student> selectStudentByAll(SqlSession sqlSession) {
-		return sqlSession.selectList(namespace + ".selectStudentByAll");
+	public Student selectStudentByNoWithResultMap(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace + ".selectStudentByNoWithResultMap", student);
+		}
 	}
 
 	@Override
-	public int insertStudent(SqlSession sqlSession, Student student) {
-		int res = sqlSession.insert(namespace + ".insertStudent", student);
-        sqlSession.commit();
-        return res;
+	public List<Student> selectStudentByAll() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectStudentByAll");
+		}
 	}
 
 	@Override
-	public int insertStudentAutoInc(SqlSession sqlSession, Student student) {
-		int res = sqlSession.insert(namespace + ".insertStudentAutoInc", student);
-        sqlSession.commit();
-        return res;
+	public int insertStudent(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.insert(namespace + ".insertStudent", student);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 	@Override
-	public int deleteStudent(SqlSession sqlSession, int id) {
-		int res = sqlSession.delete(namespace + ".deleteStudent", id);
-        sqlSession.commit();
-        return res;
+	public int insertStudentAutoInc(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.insert(namespace + ".insertStudentAutoInc", student);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 	@Override
-	public int updateStudent(SqlSession sqlSession, Student student) {
-		int res = sqlSession.update(namespace + ".updateStudent", student);
-		sqlSession.commit();
-		return res;
+	public int deleteStudent(int id) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.delete(namespace + ".deleteStudent", id);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 	@Override
-	public List<Student> selectStudentByAllForResutlMap(SqlSession sqlSession) {
-		return sqlSession.selectList(namespace + ".selectStudentByAllForResutlMap");
+	public int updateStudent(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.update(namespace + ".updateStudent", student);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 	@Override
-	public List<Map<String, Object>> selectStudentByAllForHashMap(SqlSession sqlSession) {
-		return sqlSession.selectList(namespace + ".selectStudentByAllForHashMap");
+	public List<Student> selectStudentByAllForResutlMap() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectStudentByAllForResutlMap");
+		}
 	}
 
 	@Override
-	public Student selectStudentByNoAssociation(SqlSession sqlSession, Student student) {
-		return sqlSession.selectOne(namespace + ".selectStudentByNoAssociation", student);
+	public List<Map<String, Object>> selectStudentByAllForHashMap() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectStudentByAllForHashMap");
+		}
 	}
 
 	@Override
-	public int insertEnumStudent(SqlSession sqlSession, Student student) {
-		int res = sqlSession.insert(namespace + ".insertEnumStudent", student);
-        sqlSession.commit();
-        return res;
+	public Student selectStudentByNoAssociation(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace + ".selectStudentByNoAssociation", student);
+		}
 	}
 
 	@Override
-	public Student selectAllStudentByMap(SqlSession sqlSession, Map<String, String> map) {
-		return sqlSession.selectOne(namespace + ".selectAllStudentByMap", map);
+	public int insertEnumStudent(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.insert(namespace + ".insertEnumStudent", student);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 	@Override
-	public Map<Integer, String> selectStudentForMap(SqlSession sqlSession) {
+	public Student selectAllStudentByMap(Map<String, String> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace + ".selectAllStudentByMap", map);
+		}
+	}
+
+	@Override
+	public Map<Integer, String> selectStudentForMap() {
 		Map<Integer, String> map = new HashMap<>();
 		ResultHandler<Student> resultHandler = new ResultHandler<Student>() {
 			@Override
 			public void handleResult(ResultContext<? extends Student> resultContext) {
 				Student student = resultContext.getResultObject();
-				map.put(student.getStudId(), student.getName());                
+				map.put(student.getStudId(), student.getName());
 			}
 		};
-		sqlSession.selectList(namespace + ".selectStudentForMap",resultHandler);
-		return map;
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			sqlSession.selectList(namespace + ".selectStudentForMap", resultHandler);
+			return map;
+		}
 	}
 
 	@Override
-	public int updateSetStudent(SqlSession sqlSession, Student student) {
-		int res = sqlSession.update(namespace + ".updateSetStudent", student);
-        sqlSession.commit();
-        return res;
+	public int updateSetStudent(Student student) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.update(namespace + ".updateSetStudent", student);
+			sqlSession.commit();
+			return res;
+		}
 	}
 
 }

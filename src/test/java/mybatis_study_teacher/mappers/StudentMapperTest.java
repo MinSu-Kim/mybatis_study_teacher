@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
-import org.apache.ibatis.session.SqlSession;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -20,26 +20,28 @@ import org.junit.runners.MethodSorters;
 import mybatis_study_teacher.dto.Gender;
 import mybatis_study_teacher.dto.PhoneNumber;
 import mybatis_study_teacher.dto.Student;
-import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentMapperTest {
-	private static SqlSession sqlSession;
 	private static StudentMapper dao;
 	protected static final Log log = LogFactory.getLog(StudentMapperTest.class);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		sqlSession = MyBatisSqlSessionFactory.openSession();
-		dao = new StudentMapperImpl();
+		dao = StudentMapperImpl.getInstance();
 	}
 
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		dao = null;
+	}
+	
 	@Test
 	public void test01SelectStudentByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
-		Student selectStudent = dao.selectStudentByNo(sqlSession, student);
+		Student selectStudent = dao.selectStudentByNo(student);
 		log.debug(selectStudent.toString());
 		Assert.assertEquals(student.getStudId(), selectStudent.getStudId());
 	}
@@ -49,7 +51,7 @@ public class StudentMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Student student = new Student();
 		student.setStudId(1);
-		Student selectStudent = dao.selectStudentByNoWithResultMap(sqlSession, student);
+		Student selectStudent = dao.selectStudentByNoWithResultMap(student);
 		log.debug(selectStudent.toString());
 		Assert.assertEquals(student.getStudId(), selectStudent.getStudId());
 	}
@@ -57,7 +59,7 @@ public class StudentMapperTest {
 	@Test
 	public void test03SelectStudentByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-	    List<Student> lists = dao.selectStudentByAll(sqlSession);
+	    List<Student> lists = dao.selectStudentByAll();
 	    Assert.assertNotNull(lists);
 	    for(Student std : lists) {
 	    	log.debug(std.toString());
@@ -75,7 +77,7 @@ public class StudentMapperTest {
         student.setEmail("lee@test.co.kr");
         student.setPhone(new PhoneNumber("010-1234-1234"));
         student.setDob(newDate.getTime());
-        int res = dao.insertStudent(sqlSession, student);
+        int res = dao.insertStudent(student);
         Assert.assertEquals(1, res);
     }
 /*
@@ -89,14 +91,14 @@ public class StudentMapperTest {
         student.setEmail("lee4@test.co.kr");
         student.setDob(newDate.getTime());
         student.setPhone(new PhoneNumber("010-1234-1234"));      
-        int res = dao.insertStudentAutoInc(sqlSession, student);
+        int res = dao.insertStudentAutoInc(student);
         Assert.assertEquals(1, res);
     }
 */    
     @Test
     public void test06DeleteStudent(){
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-        int deleteStudent = dao.deleteStudent(sqlSession, 3);
+        int deleteStudent = dao.deleteStudent(3);
         Assert.assertSame(1, deleteStudent);
     }
 
@@ -110,20 +112,20 @@ public class StudentMapperTest {
         student.setPhone(new PhoneNumber("987-654-3211"));
         student.setDob(new Date());
         
-        int result = dao.updateStudent(sqlSession, student);
+        int result = dao.updateStudent(student);
         Assert.assertSame(1, result);
                 
         student.setEmail("timothy@gmail.com");
         student.setPhone(new PhoneNumber("123-123-1234"));
         student.setDob(new GregorianCalendar(1988, 04, 25).getTime());
-        result = dao.updateStudent(sqlSession, student);
+        result = dao.updateStudent(student);
         Assert.assertSame(1, result);
     }
 
     @Test
     public void test08SelectStudentByAllForResutlMap(){
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-       List<Student> lists = dao.selectStudentByAllForResutlMap(sqlSession);
+       List<Student> lists = dao.selectStudentByAllForResutlMap();
        Assert.assertNotNull(lists);
        for(Student std : lists) {
     	   log.debug(std.toString());
@@ -133,7 +135,7 @@ public class StudentMapperTest {
     @Test
     public void test09SelectStudentByAllForHashMap(){
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-       List<Map<String,Object>> lists = dao.selectStudentByAllForHashMap(sqlSession);
+       List<Map<String,Object>> lists = dao.selectStudentByAllForHashMap();
        Assert.assertNotNull(lists);
        for(Map<String, Object> map : lists) {
     	   for(Entry<String, Object> e : map.entrySet()) {
@@ -147,7 +149,7 @@ public class StudentMapperTest {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
         Student student = new Student();
         student.setStudId(1);
-        Student seletedStd = dao.selectStudentByNoAssociation(sqlSession, student);
+        Student seletedStd = dao.selectStudentByNoAssociation(student);
         Assert.assertNotNull(seletedStd);
         log.debug(seletedStd.toString());
      }
@@ -165,7 +167,7 @@ public class StudentMapperTest {
         student.setDob(newDate.getTime());
         student.setPhone(new PhoneNumber("010-1234-1234"));
         student.setGender(Gender.FEMALE);
-        int res = dao.insertEnumStudent(sqlSession, student);
+        int res = dao.insertEnumStudent(student);
         Assert.assertEquals(1, res);
         
         student.setStudId(5);
@@ -174,10 +176,10 @@ public class StudentMapperTest {
         student.setDob(newDate.getTime());
         student.setPhone(new PhoneNumber("010-1234-1234"));
         student.setGender(Gender.MALE);
-        int res1 = dao.insertEnumStudent(sqlSession, student);
+        int res1 = dao.insertEnumStudent(student);
         Assert.assertEquals(1, res1);
-        dao.deleteStudent(sqlSession, 4);
-        dao.deleteStudent(sqlSession, 5);
+        dao.deleteStudent(4);
+        dao.deleteStudent(5);
     }
 
     @Test
@@ -186,24 +188,24 @@ public class StudentMapperTest {
         Map<String, String> maps = new HashMap<>();
         maps.put("name", "Timothy");
         maps.put("email", "timothy@gmail.com");
-        Student student = dao.selectAllStudentByMap(sqlSession, maps);
+        Student student = dao.selectAllStudentByMap(maps);
         Assert.assertNotNull(student);
         log.debug(student.toString());
 
         maps.remove("email");
-        student = dao.selectAllStudentByMap(sqlSession, maps);
+        student = dao.selectAllStudentByMap(maps);
         log.debug(student.toString());
        
         maps.clear();
         maps.put("email", "timothy@gmail.com");
-        student = dao.selectAllStudentByMap(sqlSession, maps);
+        student = dao.selectAllStudentByMap(maps);
         log.debug(student.toString()); 
     }
 
     @Test
     public void test13SelectStudentForMap() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
-        Map<Integer, String> map = dao.selectStudentForMap(sqlSession);
+        Map<Integer, String> map = dao.selectStudentForMap();
         Assert.assertNotNull(map);
         
         for(Entry<Integer, String>entry : map.entrySet()){
@@ -219,13 +221,13 @@ public class StudentMapperTest {
         student.setPhone(new PhoneNumber("987-654-3211"));
         student.setDob(new Date());
         
-        int result = dao.updateSetStudent(sqlSession, student);
+        int result = dao.updateSetStudent(student);
         Assert.assertSame(1, result);
         
         student.setPhone(new PhoneNumber("123-123-1234"));
         student.setDob(new GregorianCalendar(1988, 04, 25).getTime());
         
-        result = dao.updateSetStudent(sqlSession, student);
+        result = dao.updateSetStudent(student);
         Assert.assertSame(1, result);
     }
 

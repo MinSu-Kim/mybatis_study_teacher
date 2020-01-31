@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,23 +17,19 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.UserPic;
-import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserPicMapperTest {
-	private static SqlSession sqlSession;
 	private static UserPicMapper dao;
 	protected static final Log log = LogFactory.getLog(UserPicMapperTest.class);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		sqlSession = MyBatisSqlSessionFactory.openSession();
-		dao = new UserPicMapperImpl();
+		dao = UserPicMapperImpl.getInstance();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		sqlSession.close();
 		dao = null;
 	}
 
@@ -46,11 +41,11 @@ public class UserPicMapperTest {
 //        userPic.setName("LeeYouYong");
 //        userPic.setBio("put some lengthy bio here");
 //        userPic.setPic(getPicFile());
-//        int result = dao.insertUserPic(sqlSession, userPic);
+//        int result = dao.insertUserPic(userPic);
 //        Assert.assertSame(1, result);
 //	}
 
-	private byte[] getPicFile(){
+	public byte[] getPicFile(){
         byte[] pic = null;
         File file = new File(System.getProperty("user.dir") + "\\images\\lyy.jpg");
         try (InputStream is = new FileInputStream(file);){
@@ -67,7 +62,7 @@ public class UserPicMapperTest {
 	@Test
 	public void testBGetUserPic() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
-        UserPic userPic = dao.getUserPic(sqlSession, 1);
+        UserPic userPic = dao.getUserPic(1);
         if (userPic.getPic() != null) {
             File file = getPicFile(userPic);
             System.out.println("file path " + file.getAbsolutePath());

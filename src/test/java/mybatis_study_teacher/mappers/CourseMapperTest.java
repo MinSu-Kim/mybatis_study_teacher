@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,23 +18,19 @@ import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.Course;
 import mybatis_study_teacher.dto.CourseStat;
-import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CourseMapperTest {
-	private static SqlSession sqlSession;
 	private static CourseMapper dao;
 	protected static final Log log = LogFactory.getLog(CourseMapperTest.class);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		sqlSession = MyBatisSqlSessionFactory.openSession();
-		dao = new CourseMapperImpl();
+		dao = CourseMapperImpl.getInstance();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		sqlSession.close();
 		dao = null;
 	}
 
@@ -43,11 +38,10 @@ public class CourseMapperTest {
 	public void test01SelectCoursesByCondition() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-        GregorianCalendar cal = new GregorianCalendar(2013, 1, 1);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tutorId", 1);
        
-        List<Course> courses = dao.selectCoursesByCondition(sqlSession, map);
+        List<Course> courses = dao.selectCoursesByCondition(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -58,11 +52,10 @@ public class CourseMapperTest {
 	public void test02SelectCoursesByCondition() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-        GregorianCalendar cal = new GregorianCalendar(2013, 1, 1);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("courseName", "%java%");
        
-        List<Course> courses = dao.selectCoursesByCondition(sqlSession, map);
+        List<Course> courses = dao.selectCoursesByCondition(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -77,7 +70,7 @@ public class CourseMapperTest {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startDate", cal.getTime());
        
-        List<Course> courses = dao.selectCoursesByCondition(sqlSession, map);
+        List<Course> courses = dao.selectCoursesByCondition(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -90,7 +83,7 @@ public class CourseMapperTest {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("searchBy", "Tutor");
         map.put("tutorId", 1);
-        List<Course> courses = dao.selectCaseCourses(sqlSession, map);
+        List<Course> courses = dao.selectCaseCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -99,7 +92,7 @@ public class CourseMapperTest {
         map.replace("searchBy", "CourseName");
         map.remove("tutorId");
         map.put("courseName", "%java%");
-        courses = dao.selectCaseCourses(sqlSession, map);
+        courses = dao.selectCaseCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -112,28 +105,28 @@ public class CourseMapperTest {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
-        List<Course> courses = dao.selectWhereCourses(sqlSession, map);
+        List<Course> courses = dao.selectWhereCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
         }
         
         map.put("tutorId", 1);
-        courses = dao.selectWhereCourses(sqlSession, map);
+        courses = dao.selectWhereCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
         }
         
         map.put("courseName", "%java%");
-        courses = dao.selectWhereCourses(sqlSession, map);
+        courses = dao.selectWhereCourses(map);
         for(Course c : courses) {
         	log.trace(c.toString());
         }
         
         map.clear();
         map.put("endDate", new Date());
-        courses = dao.selectWhereCourses(sqlSession, map);
+        courses = dao.selectWhereCourses(map);
         for(Course c : courses) {
         	log.trace(c.toString());
         }
@@ -145,14 +138,14 @@ public class CourseMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Course> courses = dao.selectTrimCourses(sqlSession, map);
+        List<Course> courses = dao.selectTrimCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
         }
         
         map.put("tutorId", 1);
-        courses = dao.selectTrimCourses(sqlSession, map);
+        courses = dao.selectTrimCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -160,7 +153,7 @@ public class CourseMapperTest {
         
         map.clear();
         map.put("courseName", "%java%");
-        courses = dao.selectTrimCourses(sqlSession, map);
+        courses = dao.selectTrimCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -169,7 +162,7 @@ public class CourseMapperTest {
         map.clear();
         map.put("tutorId", 1);
         map.put("courseName", "%java%");
-        courses = dao.selectTrimCourses(sqlSession, map);
+        courses = dao.selectTrimCourses(map);
         Assert.assertNotNull(courses);
         for(Course c : courses) {
         	log.trace(c.toString());
@@ -187,7 +180,7 @@ public class CourseMapperTest {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tutorIds", tutorIds);
         
-        List<Course> courses = dao.selectCoursesForeachByTutors(sqlSession, map);
+        List<Course> courses = dao.selectCoursesForeachByTutors(map);
         Assert.assertNotNull(courses);
         
         for(Course c : courses) {
@@ -206,22 +199,14 @@ public class CourseMapperTest {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tutors", tutors);
         
-        int res = dao.insertCourses(sqlSession, map);
+        int res = dao.insertCourses(map);
         Assert.assertEquals(3, res);
     }
     
     @Test
-    public void test09InsertCourse() {
-    	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-    	Course newCourse = new Course(7, "Python", "Programming", new Date(), new Date(), 4);
-    	int res = dao.insertCourse(sqlSession, newCourse);
-    	Assert.assertEquals(1, res);
-    }
-
-    @Test
     public void test10DeleteCourseGreaterId() {
     	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-    	int res = dao.deleteCourseGreaterId(sqlSession, 2);
+    	int res = dao.deleteCourseGreaterId(2);
     	Assert.assertNotEquals(0, res);
     }
     
@@ -231,7 +216,7 @@ public class CourseMapperTest {
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
        Map<String, Object> param = new HashMap<>();
        param.put("tutor_id", 1);
-       Map<String,Object> map= dao.getCourseCountByTutor(sqlSession, param);
+       Map<String,Object> map= dao.getCourseCountByTutor(param);
        Assert.assertNotEquals(0, map.size());
     }
 
@@ -240,14 +225,14 @@ public class CourseMapperTest {
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
        Map<String, Object> param = new HashMap<>();
        param.put("tutor_id", 1);
-       Map<String,Object> map= dao.getCourseCountByTutor2(sqlSession, param);
+       Map<String,Object> map= dao.getCourseCountByTutor2(param);
        Assert.assertNotEquals(0, map.size());
     }
 
     @Test
     public void test12getCourseCountByTutor3() {
        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
-       CourseStat stat = dao.getCourseCountByTutor3(sqlSession, 1);
+       CourseStat stat = dao.getCourseCountByTutor3(1);
        Assert.assertNotNull(stat);
 
     }

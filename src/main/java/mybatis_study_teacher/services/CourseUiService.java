@@ -5,28 +5,17 @@ import org.apache.ibatis.session.SqlSession;
 import mybatis_study_teacher.dto.Course;
 import mybatis_study_teacher.dto.Tutor;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
-import mybatis_study_teacher.mappers.CourseMapper;
-import mybatis_study_teacher.mappers.CourseMapperImpl;
-import mybatis_study_teacher.mappers.TutorMapper;
-import mybatis_study_teacher.mappers.TutorMapperImpl;
 
 public class CourseUiService {
-	private CourseMapper courseDao;
-	private TutorMapper tutorDao;
-	private SqlSession sqlSession;
-
-	public CourseUiService() {
-		courseDao = new CourseMapperImpl();
-		tutorDao = new TutorMapperImpl();
-
-	}
-
+	private String namespace_course = "mybatis_study_teacher.mappers.CourseMapper";
+	private String namespace_tutor = "mybatis_study_teacher.mappers.TutorMapper";
+	
 	public void joinNewTutorAndCourse(Tutor tutor, Course course) {
-		sqlSession = MyBatisSqlSessionFactory.openSession();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		int res = 0;
 		try {
-			res += tutorDao.insertTutor(sqlSession, tutor);
-			res += courseDao.insertCourse(sqlSession, course);
+			res += sqlSession.insert(namespace_tutor + ".insertTutor", tutor);
+			res += sqlSession.insert(namespace_course + ".insertCourse", course);
 			if (res == 2)
 				sqlSession.commit();
 			else
@@ -41,11 +30,11 @@ public class CourseUiService {
 	}
 
 	public void removeTutorAndCourse(int tutorId, int courseId) {
-		sqlSession = MyBatisSqlSessionFactory.openSession();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		int res = 0;
 		try {
-			res += courseDao.deleteCourse(sqlSession, courseId);
-			res += tutorDao.deleteTutor(sqlSession, tutorId);
+			res +=  sqlSession.delete(namespace_course + ".deleteCourse", courseId);
+			res += sqlSession.delete(namespace_tutor + ".deleteTutor", tutorId);
 			if (res == 2)
 				sqlSession.commit();
 			else
@@ -58,4 +47,5 @@ public class CourseUiService {
 			sqlSession.close();
 		}
 	}
+
 }
