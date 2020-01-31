@@ -1,7 +1,7 @@
 package mybatis_study_teacher.services;
 
 import mybatis_study_teacher.dto.Tutor;
-import mybatis_study_teacher.mappers.TutorMapperImpl;
+import mybatis_study_teacher.mappers.impl.TutorMapperImpl;
 
 public class TutorUIService {
 	private TutorMapperImpl tutorMapper;

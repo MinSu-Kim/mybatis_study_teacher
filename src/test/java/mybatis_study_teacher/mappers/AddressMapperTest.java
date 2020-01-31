@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import mybatis_study_teacher.dto.Address;
+import mybatis_study_teacher.mappers.impl.AddressMapperImpl;
 
 public class AddressMapperTest {
 	private static AddressMapper dao;

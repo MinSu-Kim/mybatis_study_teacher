@@ -1,9 +1,10 @@
-package mybatis_study_teacher.mappers;
+package mybatis_study_teacher.mappers.impl;
 
 import org.apache.ibatis.session.SqlSession;
 
 import mybatis_study_teacher.dto.Tutor;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
+import mybatis_study_teacher.mappers.TutorMapper;
 
 public class TutorMapperImpl implements TutorMapper {
 	private String namespace = "mybatis_study_teacher.mappers.TutorMapper";

@@ -1,4 +1,4 @@
-package mybatis_study_teacher.mappers;
+package mybatis_study_teacher.mappers.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import mybatis_study_teacher.dto.Address;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
+import mybatis_study_teacher.mappers.AddressMapper;
 
 public class AddressMapperImpl implements AddressMapper {
 	private String namespace = "mybatis_study_teacher.mappers.AddressMapper";

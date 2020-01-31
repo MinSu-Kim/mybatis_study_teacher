@@ -13,6 +13,7 @@ import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.Course;
 import mybatis_study_teacher.dto.Tutor;
+import mybatis_study_teacher.mappers.impl.TutorMapperImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TutorMapperTest {

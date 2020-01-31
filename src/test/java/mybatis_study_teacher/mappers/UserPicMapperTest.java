@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.UserPic;
+import mybatis_study_teacher.mappers.impl.UserPicMapperImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserPicMapperTest {

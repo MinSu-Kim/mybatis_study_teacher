@@ -18,6 +18,7 @@ import org.junit.runners.MethodSorters;
 
 import mybatis_study_teacher.dto.Course;
 import mybatis_study_teacher.dto.CourseStat;
+import mybatis_study_teacher.mappers.impl.CourseMapperImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CourseMapperTest {

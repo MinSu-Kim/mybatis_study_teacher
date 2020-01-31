@@ -20,6 +20,7 @@ import org.junit.runners.MethodSorters;
 import mybatis_study_teacher.dto.Gender;
 import mybatis_study_teacher.dto.PhoneNumber;
 import mybatis_study_teacher.dto.Student;
+import mybatis_study_teacher.mappers.impl.StudentMapperImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentMapperTest {

@@ -1,4 +1,4 @@
-package mybatis_study_teacher.mappers;
+package mybatis_study_teacher.mappers.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import mybatis_study_teacher.dto.Student;
 import mybatis_study_teacher.jdbc.MyBatisSqlSessionFactory;
+import mybatis_study_teacher.mappers.StudentMapper;
 
 public class StudentMapperImpl implements StudentMapper {
 	private String namespace = "mybatis_study_teacher.mappers.StudentMapper";
