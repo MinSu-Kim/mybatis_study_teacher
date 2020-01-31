@@ -39,7 +39,6 @@ public class CourseUiServiceTest {
     	Course course = new Course(8, "Python", "Programming", new Date(), new Date(), 4);
     	
     	service.joinNewTutorAndCourse(tutor, course);
-
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -67,7 +66,7 @@ public class CourseUiServiceTest {
     	
     	service.joinNewTutorAndCourse(tutor, course);
 	}
-/*	
+	
 	@Test(expected=RuntimeException.class)
 	public void test4RemoveTutorAndCourseFailTutor() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
@@ -85,5 +84,5 @@ public class CourseUiServiceTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
 		service.removeTutorAndCourse(6, 8);
 	}
-*/
+
 }
