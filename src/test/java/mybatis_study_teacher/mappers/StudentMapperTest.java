@@ -205,7 +205,7 @@ public class StudentMapperTest extends AbstractTest{
     @Test
     public void test13SelectStudentForMap() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
-        Map<Integer, String> map = dao.selectStudentForMap();
+        Map<Integer, String> map = dao.selectStudentForMap(1);
         Assert.assertNotNull(map);
         
         for(Entry<Integer, String>entry : map.entrySet()){

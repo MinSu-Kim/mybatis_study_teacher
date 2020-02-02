@@ -119,7 +119,7 @@ public class StudentMapperImpl implements StudentMapper {
 	}
 
 	@Override
-	public Map<Integer, String> selectStudentForMap() {
+	public Map<Integer, String> selectStudentForMap(int studId) {
 		Map<Integer, String> map = new HashMap<>();
 		ResultHandler<Student> resultHandler = new ResultHandler<Student>() {
 			@Override
@@ -129,7 +129,7 @@ public class StudentMapperImpl implements StudentMapper {
 			}
 		};
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			sqlSession.selectList(namespace + ".selectStudentForMap", resultHandler);
+			sqlSession.select(namespace + ".selectStudentForMap", studId, resultHandler);
 			return map;
 		}
 	}

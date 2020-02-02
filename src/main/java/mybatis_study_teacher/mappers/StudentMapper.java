@@ -34,7 +34,7 @@ public interface StudentMapper {
     Student selectAllStudentByMap(Map<String, String> map);
     
 	/* ResultSet 처리방식의 재정의 */
-    Map<Integer, String> selectStudentForMap();
+    Map<Integer, String> selectStudentForMap(int studId);
 
 	/* set 조건 */
     int updateSetStudent(Student student);
